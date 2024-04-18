@@ -1,8 +1,8 @@
 const express = require('express');
 const cors = require('cors');
-const routerApi = require('./routes');
+const routerApi = require('../routes');
 
-const { logErrors, errorHandler, boomErrorHandler } = require('./middlewares/errors.handler')
+const { logErrors, errorHandler, boomErrorHandler } = require('../middlewares/errors.handler')
 
 const app = express();
 const port = 3005;
@@ -22,7 +22,7 @@ const options = {
 
 app.use(cors(options));
 
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
   res.send('Hello World!');
 });
 
