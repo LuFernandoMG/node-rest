@@ -1,8 +1,8 @@
 const express = require('express');
 const cors = require('cors');
-const routerApi = require('../routes');
+const routerApi = require('./routes');
 
-const { logErrors, errorHandler, boomErrorHandler } = require('../middlewares/errors.handler')
+const { logErrors, errorHandler, boomErrorHandler } = require('./middlewares/errors.handler')
 
 const app = express();
 const port = process.env.PORT || 3005;
@@ -33,6 +33,7 @@ app.use(boomErrorHandler);
 app.use(errorHandler);
 
 app.listen(port, () => {
+  // eslint-disable-next-line no-console
   console.log(`Example app listening at http://localhost:${port}`);
 });
 
