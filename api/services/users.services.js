@@ -1,9 +1,17 @@
 const { faker } = require('@faker-js/faker');
 
+const pool = require('../libs/postgres.pool');
+
 class UserService {
   constructor() {
     this.users = [];
     this.generate();
+    this.pool = pool;
+    this.pool.on('error', (err) => {
+      // eslint-disable-next-line no-console
+      console.error('Unexpected error on idle client', err);
+      process.exit(-1);
+    });
   }
 
   generate() {
@@ -22,7 +30,9 @@ class UserService {
   }
 
   async find() {
-    return this.users;
+    const query = 'SELECT * FROM tasks';
+    const rta = await this.pool.query(query);
+    return rta.rows;
   }
 
   async findOne(id) {
